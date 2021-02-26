@@ -1,71 +1,61 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
 }
 
-.btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+header{
+  display: flex;
+  justify-content: space-between;
+  background-color: #0D1321;
+  border-bottom: 10px solid #000;
+  padding: 10px 20px;
+}
+
+nav{
+  text-align: right;
+}
+
+#menu::before{
+  content: "";
+  background-color: #033F63;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+#menu{
+  display: inline-flex;
+  align-items: center;
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  font-size: 20 px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-right: 30px;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.button{
+  display: inline-block;
+  background-color: #033F63;
+  box-shadow: 5px 5px 0px #000;
+  padding: 18px 20px;
+  color:#fff;
+  transition: transform 100ms cubic-bezier(.45, .97, .68, 2.48);
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
+.button:hover{
+    transform: scale(1.08);
 }
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
 }
