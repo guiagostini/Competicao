@@ -2,11 +2,18 @@
   font-family:'Fira Code', Arial, Helvetica, sans-serif;
 }
 
+h1{
+  font-family: 'F1Bold', sans-serif;
+  font-size: 40px;
+  color: #033F63;
+  text-shadow: 4px 4px 0 #000;
 }
 
+h2{
+  font-family: 'F1Regular', sans-serif;
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  text-shadow: 3px 3px 0 #000;
+  font-size: 30px;
 }
 
 header{
@@ -51,13 +58,42 @@ nav{
 .button:hover{
     transform: scale(1.08);
 }
+
+#box{
+  display: inline-block;
+  background-color: #8E9489;
+  box-shadow: 10px 10px 0 #000;
+  text-align: center;
+  padding: 42px 90px;
 }
 
+#box h1{
+  margin-bottom: 28px;
 }
 
+.banner{
+  background-image: url('../torcida.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: 100%;
+  height: 760px;
+  border-bottom: 10px solid #000;
+  padding-top: 115px;
+  padding-left: 90px;
+  padding-right: 20px;
 }
 
+.banner .wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 640px;
 }
 
+.banner #box{
+  margin-bottom: 32px;
 }
+
+.banner .navigation{
+  display:flex;
+  justify-content: space-around;
 }
