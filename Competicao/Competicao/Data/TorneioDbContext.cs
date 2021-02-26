@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Competicao.Models;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Threading;
 
 namespace Competicao.Data
 {
@@ -35,6 +38,10 @@ namespace Competicao.Data
 
                 t.Property(p => p.Criacao)
                 .HasColumnName("TOR_CRIACAO")
+                .IsRequired();
+
+                t.Property(p => p.Modificacao)
+                .HasColumnName("TOR_MODIFICACAO")
                 .IsRequired();
 
                 t.HasKey(pk => pk.ID);
