@@ -1,0 +1,41 @@
+@font-face{
+    src: url('../fonts/Formula1-Regular.woff2') format('woff2');
+    font-family: 'F1Regular';
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face{
+src: url('../fonts/Formula1-Bold.woff2') format('woff2');
+font-family: 'F1Bold';
+font-style:normal;
+font-weight: bold;
+}
+
+@font-face{
+src: url('../fonts/Formula1-Italic.woff2') format('woff2');
+font-family: 'F1Italic';
+font-style: italic;
+font-weight: normal;
+}
+
+@font-face{
+src: url('../fonts/Formula1-Black.woff2') format('woff2');
+font-family: 'F1Black';
+font-style:normal;
+font-weight: bolder;
+}
+
+@font-face{
+src: url('../fonts/Formula1-Wide.woff2') format('woff2');
+font-family: 'F1Wide';
+font-style: normal;
+font-weight: normal;
+}
+
+@font-face{
+src: url('../fonts/F1YEARRegular.woff2') format('woff2');
+font-family: 'F1Number';
+font-style: normal;
+font-weight: normal;
+}
