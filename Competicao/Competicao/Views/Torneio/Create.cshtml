@@ -20,6 +20,16 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input asp-for="TipoTorneio"  class="btn-check" value="Elimination" type="radio" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio1">Elimination</label>
+
+                <input asp-for="TipoTorneio"  class="btn-check" value="Double Elimination" type="radio" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Double Elimination</label>
+
+                <input asp-for="TipoTorneio"  class="btn-check" value="Swiss" type="radio" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">Swiss</label>
+            </div>
         </form>
     </div>
 </div>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Competicao.Models.Infra.Usuario> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<Competicao.Models.Infra.Usuario> UserManager
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -22,7 +25,17 @@
             <a id="menu" class="" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             <a id="menu" class="" asp-area="" asp-controller="Torneio" asp-action="Index">Torneio</a>
             <a id="menu" class="" asp-area="" asp-controller="Time" asp-action="Index">Time</a>
-            <a class="button" asp-area="" asp-controller="Infra" asp-action="Acessar">Login</a>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div>Olá @UserManager.GetUserName(User), seja bem-vindo(a) / @Html.ActionLink("Logout", "Sair", "Infra", new
+                        { area = "" })</div>
+            }
+            else
+            {
+                <a class="button" asp-area="" asp-controller="Infra" asp-action="Acessar">Login</a>
+            }
+
         </nav>
     </header>
     <div class="container-fluid p-0">
