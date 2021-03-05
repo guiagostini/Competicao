@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Competicao.Models.Infra;
 
 namespace Competicao.Models
 {
@@ -27,5 +28,10 @@ namespace Competicao.Models
         public DateTime Modificacao { get; set; }
 
         public virtual ICollection<Time> Times { get; set; }
+
+        public ICollection<Time> Times { get; set; }
+
+        public string UsuarioID { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

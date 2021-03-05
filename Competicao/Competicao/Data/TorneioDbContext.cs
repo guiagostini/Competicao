@@ -25,6 +25,10 @@ namespace Competicao.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Usuario>()
+            .HasMany(u => u.Torneios)
+            .WithOne();
+
             builder.Entity<Torneio>(t =>
             {
                 t.ToTable("TOR_TORNEIOS");
@@ -49,8 +53,11 @@ namespace Competicao.Data
                 t.HasKey(pk => pk.ID);
 
                 t.HasMany(p => p.Times)
-                .WithOne(p => p.Torneio)
-                .HasForeignKey(fk => fk.TorneioID);
+                .WithOne();
+
+                t.HasOne(t => t.Usuario)
+                .WithMany(u => u.Torneios)
+                .HasForeignKey(fk => fk.UsuarioID);
             });
 
             builder.Entity<Time>(t =>
