@@ -4,14 +4,16 @@ using Competicao.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Competicao.Migrations
 {
     [DbContext(typeof(TorneioDbContext))]
-    partial class TorneioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210304120734_TipoTorneio_Torneio")]
+    partial class TipoTorneio_Torneio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,8 +100,6 @@ namespace Competicao.Migrations
                         .HasColumnType("nvarchar(35)")
                         .HasColumnName("TI_NOME");
 
-                    b.Property<long?>("TorneioID")
-                        .IsRequired()
                     b.Property<long>("TorneioID")
                         .HasColumnType("bigint")
                         .HasColumnName("TOR_ID");

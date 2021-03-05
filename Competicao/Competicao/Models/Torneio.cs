@@ -27,7 +27,7 @@ namespace Competicao.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Modificacao { get; set; }
 
-        public virtual ICollection<Time> Times { get; set; }
+        public string TipoTorneio { get; set; }
 
         public ICollection<Time> Times { get; set; }
 
