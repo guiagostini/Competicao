@@ -5,10 +5,12 @@ using Competicao.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Competicao.Models.Infra;
 
 namespace Competicao.Data
 {
-    public class TorneioDbContext : DbContext
+    public class TorneioDbContext : IdentityDbContext<Usuario>
     {
         public DbSet<Torneio> Torneios { get; set; }
         public DbSet<Time> Times { get; set; }
