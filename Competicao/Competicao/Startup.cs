@@ -61,8 +61,12 @@ namespace Competicao
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // who you are ?
             app.UseAuthentication();
+
+            // are you allowed ?
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
