@@ -26,9 +26,13 @@ namespace Competicao.Data
         {
             base.OnModelCreating(builder);
 
+            var splitStringConverter = new ValueConverter<IList<string>, string>(v => string.Join(";", v), v => v.Split(new[] { ';' }));
+
             builder.Entity<Usuario>()
             .HasMany(u => u.Torneios)
             .WithOne();
+
+            builder.Entity<Time>().Property(nameof(Time.Nome)).HasConversion(splitStringConverter);
 
             builder.Entity<Torneio>(t =>
             {
@@ -71,8 +75,7 @@ namespace Competicao.Data
 
                 t.Property(p => p.Nome)
                 .HasColumnName("TI_NOME")
-                .IsRequired()
-                .HasMaxLength(35);
+                .IsRequired();
 
                 t.Property(p => p.TorneioID)
                 .HasColumnName("TOR_ID")

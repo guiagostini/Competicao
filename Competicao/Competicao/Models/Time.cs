@@ -12,9 +12,8 @@ namespace Competicao.Models
         public long? ID { get; set; }
 
         [Display(Name = "Nome do Time")]
-        [MaxLength(35, ErrorMessage = "O nome do time deve ter no máximo 35 caracteres")]
         [Required]
-        public string Nome { get; set; }
+        public IList<string> Nome { get; set; }
 
         public Torneio Torneio { get; set; }
         public long? TorneioID { get; set; }
