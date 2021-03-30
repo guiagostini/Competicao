@@ -2,6 +2,8 @@ using System.Linq;
 using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
 namespace Competicao.Data.DAL
 {
     public class TimeDAL
@@ -18,10 +20,15 @@ namespace Competicao.Data.DAL
             return _context.Times.Include(i => i.Torneio).OrderBy(b => b.Nome);
         }
 
+        public IQueryable<Time> ListarPorNome(string usuario)
+        {
+            return _context.Times.Include(i => i.Torneio).Where(t => t.Torneio.UsuarioID == usuario).OrderBy(b => b.Nome);
+        }
+
         public async Task<Time> ListarPorID(long id)
         {
             var time = await _context.Times.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Torneios.Where(i => time.TorneioID == i.ID).Load(); ;
+            _context.Torneios.Where(i => time.TorneioID == i.ID).Load();
             return time;
         }
 
@@ -39,6 +46,8 @@ namespace Competicao.Data.DAL
             await _context.SaveChangesAsync();
             return time;
         }
+
+
         public async Task<Time> ExcluirTimePorID(long id)
         {
             Time time = await ListarPorID(id);

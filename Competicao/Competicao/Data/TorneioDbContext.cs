@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Competicao.Models.Infra;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Competicao.Data
 {

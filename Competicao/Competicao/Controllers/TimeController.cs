@@ -10,6 +10,8 @@ using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Competicao.Models.Infra;
 
 namespace Competicao.Controllers
 {
@@ -19,10 +21,12 @@ namespace Competicao.Controllers
         private readonly TorneioDbContext _context;
         private readonly TimeDAL _timeDAL;
         private readonly TorneioDAL _torneioDAL;
+        private readonly UserManager<Usuario> _userManager;
 
-        public TimeController(TorneioDbContext context)
+        public TimeController(TorneioDbContext context, UserManager<Usuario> userManager)
         {
             this._context = context;
+            this._userManager = userManager;
             _timeDAL = new TimeDAL(context);
             _torneioDAL = new TorneioDAL(context);
         }
@@ -30,7 +34,8 @@ namespace Competicao.Controllers
         // GET: TimeController
         public async Task<IActionResult> Index()
         {
-            return View(await _timeDAL.ListarPorNome().ToListAsync());
+            var usuario = _userManager.GetUserId(User);
+            return View(await _timeDAL.ListarPorNome(usuario).ToListAsync());
         }
 
         // GET: TimeController/Details/5
@@ -42,7 +47,8 @@ namespace Competicao.Controllers
         // GET: TimeController/Create
         public IActionResult Create()
         {
-            var torneios = _torneioDAL.ListarPorNome().ToList();
+            var usuario = _userManager.GetUserId(User);
+            var torneios = _torneioDAL.ListarPorNome(usuario).ToList();
             torneios.Insert(0, new Torneio() { ID = 0, Nome = "Selecione o Torneio" });
             ViewBag.Torneios = torneios;
             return View();
@@ -71,10 +77,11 @@ namespace Competicao.Controllers
         // GET: TimeController/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
+            var usuario = _userManager.GetUserId(User);
             ViewResult visaoTime = (ViewResult)await ObterVisaoTimeID(id);
             Time time = (Time)visaoTime.Model;
 
-            ViewBag.Torneios = new SelectList(_torneioDAL.ListarPorNome(), "ID", "Nome", time.TorneioID);
+            ViewBag.Torneios = new SelectList(_torneioDAL.ListarPorNome(usuario).ToList(), "ID", "Nome", time.TorneioID);
             return visaoTime;
         }
 
@@ -124,7 +131,8 @@ namespace Competicao.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Torneios = new SelectList(_torneioDAL.ListarPorNome(), "ID", "Nome", time.TorneioID);
+            var usuario = _userManager.GetUserId(User);
+            ViewBag.Torneios = new SelectList(_torneioDAL.ListarPorNome(usuario), "ID", "Nome", time.TorneioID);
 
             return View(time);
         }

@@ -9,6 +9,10 @@ using Competicao.Data.DAL;
 using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Principal;
+using Microsoft.AspNetCore.Identity;
+using Competicao.Models.Infra;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Competicao.Controllers
 {
@@ -17,17 +21,23 @@ namespace Competicao.Controllers
     {
         private readonly TorneioDbContext _context;
         private readonly TorneioDAL _torneioDAL;
+        private readonly TimeDAL _timeDAL;
+        private readonly UserManager<Usuario> _userManager;
 
-        public TorneioController(TorneioDbContext context)
+        public TorneioController(TorneioDbContext context, UserManager<Usuario> userManager)
         {
             this._context = context;
+            this._userManager = userManager;
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             _torneioDAL = new TorneioDAL(context);
+            _timeDAL = new TimeDAL(context);
         }
 
         // GET: Torneio
         public async Task<IActionResult> Index()
         {
-            return View(await _torneioDAL.ListarPorNome().ToListAsync());
+            var usuario = _userManager.GetUserId(User);
+            return View(await _torneioDAL.ListarPorNome(usuario).ToListAsync());
         }
 
         private async Task<IActionResult> ObterVisaoTorneioID(long? id)
