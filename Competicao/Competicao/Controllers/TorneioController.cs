@@ -8,9 +8,11 @@ using Competicao.Data;
 using Competicao.Data.DAL;
 using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Competicao.Controllers
 {
+    [Authorize]
     public class TorneioController : Controller
     {
         private readonly TorneioDbContext _context;

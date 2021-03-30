@@ -9,9 +9,11 @@ using Competicao.Data.DAL;
 using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Competicao.Controllers
 {
+    [Authorize]
     public class TimeController : Controller
     {
         private readonly TorneioDbContext _context;
