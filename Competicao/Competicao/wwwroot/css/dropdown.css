@@ -1,0 +1,66 @@
+.user_img{
+    justify-content:end;
+}
+
+.drp_box {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+    width: 150px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    font-size: 15px;
+}
+
+.drp_box.open {
+    visibility: visible;
+    opacity: 1;
+    margin-top: 0;
+}
+
+.drp_box ul {
+    padding-left: 0;
+    margin-bottom: 5px;
+}
+
+.drp_box ul li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.drop_foto{
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.box a {
+    text-decoration: none;
+    transition: .5s;
+    color: #000;
+}
+
+.box a:hover {
+    color: #ff7171;
+}
+
+.drp_box ul li img,i  {
+    margin-right: 15px;
+}
+
+.drp_box ul li label{
+    vertical-align: middle;
+}
+
+.line-separator{
+    height:1px;
+    background:#717171;
+    border-bottom:1px solid #313030;
+    margin-bottom: 10px;
+}

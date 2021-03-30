@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+
 namespace Competicao.Models.Infra
 {
     public class RegistrarNovoUsuarioViewModel
@@ -20,5 +23,11 @@ namespace Competicao.Models.Infra
         [Display(Name = "Confirmar senha")]
         [Compare("Senha", ErrorMessage = "Os valores informados para SENHA devem ser iguais.")]
         public string ConfirmaSenha { get; set; }
+
+        public string FotoMimeType { get; set; }
+        public byte[] Foto { get; set; }
+
+        [NotMapped]
+        public IFormFile formFile { get; set; }
     }
 }

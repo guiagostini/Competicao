@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Competicao.Models.Infra;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Competicao.Controllers
 {
@@ -23,6 +25,7 @@ namespace Competicao.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = Logger;
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
         }
 
         [HttpGet]
@@ -45,12 +48,17 @@ namespace Competicao.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegistrarNovoUsuario(RegistrarNovoUsuarioViewModel model, string returnUrl = null)
+        public async Task<IActionResult> RegistrarNovoUsuario(RegistrarNovoUsuarioViewModel model, IFormFile foto, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = model.Email, Email = model.Email };
+                var stream = new MemoryStream();
+                await foto.CopyToAsync(stream);
+                model.Foto = stream.ToArray();
+                model.FotoMimeType = foto.ContentType;
+
+                var user = new Usuario { UserName = model.Email, Email = model.Email, Foto = model.Foto, FotoMimeType = model.FotoMimeType };
                 var result = await _userManager.CreateAsync(user, model.Senha);
                 if (result.Succeeded)
                 {
@@ -118,6 +126,14 @@ namespace Competicao.Controllers
             }
             ModelState.AddModelError(string.Empty, "Falha na tentativa de login.");
             return View(model);
+        }
+
+        public async Task<FileContentResult> GetFoto()
+        {
+            var id = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(id);
+
+            return File(user.Foto, user.FotoMimeType);
         }
     }
 }

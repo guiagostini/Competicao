@@ -1,8 +1,12 @@
+using System.Transactions;
 using System.Linq;
 using Competicao.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Competicao.Models.Infra;
+
 namespace Competicao.Data.DAL
 {
     public class TorneioDAL
@@ -14,9 +18,9 @@ namespace Competicao.Data.DAL
             this._context = context;
         }
 
-        public IQueryable<Torneio> ListarPorNome()
+        public IQueryable<Torneio> ListarPorNome(string usuario)
         {
-            return _context.Torneios.OrderBy(b => b.Nome);
+            return _context.Torneios.Where(t => t.UsuarioID == usuario).OrderBy(b => b.Nome);
         }
 
         public async Task<Torneio> ListarPorID(long id)
@@ -28,10 +32,12 @@ namespace Competicao.Data.DAL
         {
             if (torneio.ID == null)
             {
+                torneio.Criacao = DateTime.Now;
                 _context.Torneios.Add(torneio);
             }
             else
             {
+                torneio.Modificacao = DateTime.Now;
                 _context.Update(torneio);
             }
 
