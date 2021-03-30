@@ -29,8 +29,26 @@
             @Html.DisplayFor(model => model.Modificacao)
         </dd>
     </dl>
+    <ol class="rounded-list">
+        @foreach (var person in ViewBag.Data)
+        {
+            foreach (var i in person.Nome)
+            {
+                <li><a href="">@i</a></li>
+            }
+        }
+    </ol>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/select2/js/select2.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(".js-example-tags").select2({
+        tags: true
+    });
+</script>

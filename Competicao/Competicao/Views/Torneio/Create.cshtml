@@ -18,7 +18,10 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label class="control-label">Entre com os times</label>
+                <select name="Timestags"class="form-control times-tags" multiple="multiple">
+
+                </select>
             </div>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <input asp-for="TipoTorneio"  class="btn-check" value="Elimination" type="radio" autocomplete="off">
@@ -30,6 +33,9 @@
                 <input asp-for="TipoTorneio"  class="btn-check" value="Swiss" type="radio" autocomplete="off">
                 <label class="btn btn-outline-primary" for="btnradio3">Swiss</label>
             </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>
@@ -40,4 +46,16 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(".times-tags").select2({
+            placeholder: 'Entre com os times',
+            tags: true,
+            "language": "pt-BR",
+            "language": {
+                "noResults": function () {
+                    return "";
+                }
+            }
+        });
+    </script>
 }

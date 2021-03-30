@@ -59,6 +59,9 @@ namespace Competicao.Controllers
         // GET: Torneio /Details/5
         public async Task<IActionResult> Details(long? id)
         {
+            var resul = _timeDAL.ListarTimesPorTorneio((long)id);
+            ViewBag.Data = resul;
+
             return await ObterVisaoTorneioID(id);
         }
 
@@ -71,13 +74,21 @@ namespace Competicao.Controllers
         // POST: Torneio /Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome")] Torneio torneio)
+        public async Task<IActionResult> Create([Bind("Nome, TipoTorneio")] Torneio torneio, List<string> Timestags)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    var time = new Time();
+                    torneio.UsuarioID = _userManager.GetUserId(User);
                     await _torneioDAL.GravarTorneio(torneio);
+
+                    time.ID = null;
+                    time.TorneioID = torneio.ID;
+                    time.Nome = Timestags;
+                    await _timeDAL.GravarTime(time);
+
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -91,13 +102,16 @@ namespace Competicao.Controllers
         // GET: Torneio /Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
+            var resul = _timeDAL.ListarTimesPorTorneio((long)id);
+            ViewBag.Data = resul;
+
             return await ObterVisaoTorneioID((long)id);
         }
 
         // POST: Torneio /Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("Nome, ID")] Torneio torneio)
+        public async Task<IActionResult> Edit(long? id, [Bind("ID,Nome,Criacao")] Torneio torneio, List<string> Timestags)
         {
             if (id != torneio.ID)
             {
@@ -108,7 +122,14 @@ namespace Competicao.Controllers
             {
                 try
                 {
+                    torneio.UsuarioID = _userManager.GetUserId(User);
                     await _torneioDAL.GravarTorneio(torneio);
+
+
+                    var time = _context.Times.FirstOrDefault(i => i.TorneioID == id);
+                    time.Nome = Timestags;
+                    await _timeDAL.GravarTime(time);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

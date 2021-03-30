@@ -18,6 +18,15 @@
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+             <select name="Timestags"class="form-control times-tags" multiple="multiple" multiple="multiple">
+            @foreach (var person in ViewBag.Data)
+            {
+                foreach (var i in person.Nome)
+                {
+                    <option selected="true">@i</option>
+                }
+            }
+    </select>
             <div class="form-group">
                 <input asp-for="Criacao" type="hidden" class="form-control" />
             </div>
@@ -31,6 +40,15 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/select2/js/select2.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(".times-tags").select2({
+        tags: true
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
