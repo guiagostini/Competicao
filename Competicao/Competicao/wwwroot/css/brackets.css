@@ -1,0 +1,70 @@
+.linha{
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-top: 25px;
+    padding-bottom: 35px;
+}
+
+.col-1-8{
+
+    flex-direction: column;
+    display: flex;
+    width: 20%;
+    justify-content: space-around;
+    min-width: 132px;
+}
+
+
+.col-1-8 > div{
+    float: left;
+}
+
+  ul.matchup {
+    margin: 0;
+    width: 100%;
+    padding: 10px;
+  }
+  ul.matchup li {
+    padding-bottom: 2px;
+    height: 32px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #cccccc;
+    min-width: 106px;
+  }
+
+  input{
+      border: none;
+      font-family: 'Work Sans', sans-serif;
+  }
+  .seed {
+    background: #e7e7e7;
+    padding: 5px 10px;
+  }
+
+.input-group-append > button{
+    width: 100%;
+  }
+
+  @media screen and (max-width: 580px) {
+    .champ {
+        width:100%;
+    }
+}
+
+  .btn-info{
+    background-color: #287292;
+  }
+
+  .input-group-prepend{
+    min-width: 33px;
+    text-align: center;
+  }
+
+  .input-group-text{
+    min-width: 33px;
+  }
